@@ -2,34 +2,24 @@ import imutils
 import cv2
 import numpy as np
 
-src_path = "./test-img/"
-
-
-def winner_first_game(img):
+def winner_first_game(img_path):
+    img=roi(img_path)
     upper = np.array([255, 255, 170], dtype='uint8')
     lower = np.array([100, 100, 0], dtype='uint8')
-
     height, width, depth = img.shape
     circle_img = np.zeros((height, width), np.uint8)
-
     mask = cv2.circle(circle_img, (int(width / 2) - 1, int(height / 2) - 50), 10, 1, thickness=-1)
     # mask= img[int(width / 2):20, int(height / 2):20]
     # mask2 = cv2.rectangle(img, (int(width / 2)-1, int(height / 2)), (int(width / 2)-50, int(height / 2) - 50), (255, 0, 0), 3)
 
     masked_img = cv2.bitwise_and(img, img, mask=circle_img)
-
     circle_locations = mask == 1
     bgr = img[circle_locations]
     rgb = bgr[..., ::-1]
-
-    print("RGB: ")
-    print(rgb)
     yellow = [255, 255, 0]
-
     isyellow = False
     if yellow in rgb:
         isyellow = True
-
     cv2.imshow("masked", masked_img)
     return isyellow
     # return True
@@ -47,11 +37,9 @@ def order_corner_points(corners):
     return (top_l, top_r, bottom_r, bottom_l)
 
 def perspective_transform(image, corners):
-
     # Order points in clockwise order
     ordered_corners = order_corner_points(corners)
     top_l, top_r, bottom_r, bottom_l = ordered_corners
-
     # Determine width of new image which is the max distance between
     # (bottom right and bottom left) or (top right and top left) x-coordinates
     width_A = np.sqrt(((bottom_r[0] - bottom_l[0]) ** 2) + ((bottom_r[1] - bottom_l[1]) ** 2))
@@ -71,10 +59,8 @@ def perspective_transform(image, corners):
 
     # Convert to Numpy format
     ordered_corners = np.array(ordered_corners, dtype="float32")
-
     # Find perspective transform matrix
     matrix = cv2.getPerspectiveTransform(ordered_corners, dimensions)
-
     # Return the transformed image
     return cv2.warpPerspective(image, matrix, (width, height))
 
@@ -83,7 +69,6 @@ def perspective_transform(image, corners):
 
 def roi(img_path):
     image = cv2.imread(img_path)
-
     ratio = image.shape[0] / 300.0
     image = imutils.resize(image, height=300)
     realImage = image.copy()
@@ -115,21 +100,16 @@ def roi(img_path):
             transformed= image
 
 
-    cv2.imshow("image", realImage)
-    cv2.imshow("Screen Rec", image)
-    cv2.imshow("transformed", transformed)
-
     return transformed
 
 
-    winner_first_game(image)
 
 
 
 
 
-
-print("Yellow player is WINNER") if (get_string(src_path + "img1.png")) else print("Orange player is WINNER")
+src_path = "./test-img/"
+print("Yellow player is WINNER") if (winner_first_game(src_path + "img1.png")) else print("Orange player is WINNER")
 
 cv2.waitKey(0)
 
