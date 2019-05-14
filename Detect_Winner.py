@@ -4,16 +4,17 @@ import numpy as np
 
 def winner_first_game(img_path):
     img=roi(img_path)
-    upper = np.array([255, 255, 170], dtype='uint8')
-    lower = np.array([100, 100, 0], dtype='uint8')
+   # upper = np.array([255, 255, 170], dtype='uint8')
+  #  lower = np.array([100, 100, 0], dtype='uint8')
     height, width, depth = img.shape
     circle_img = np.zeros((height, width), np.uint8)
+    # define a circle mask
     mask = cv2.circle(circle_img, (int(width / 2) - 1, int(height / 2) - 50), 10, 1, thickness=-1)
-    # mask= img[int(width / 2):20, int(height / 2):20]
-    # mask2 = cv2.rectangle(img, (int(width / 2)-1, int(height / 2)), (int(width / 2)-50, int(height / 2) - 50), (255, 0, 0), 3)
 
     masked_img = cv2.bitwise_and(img, img, mask=circle_img)
     circle_locations = mask == 1
+
+    #search if there is a yellow color in the mask
     bgr = img[circle_locations]
     rgb = bgr[..., ::-1]
     yellow = [255, 255, 0]
@@ -22,7 +23,7 @@ def winner_first_game(img_path):
         isyellow = True
     cv2.imshow("masked", masked_img)
     return isyellow
-    # return True
+
 
 
 
@@ -69,6 +70,9 @@ def perspective_transform(image, corners):
 
 def roi(img_path):
     image = cv2.imread(img_path)
+    if  image is None :
+       print ("Error loading image")
+
     ratio = image.shape[0] / 300.0
     image = imutils.resize(image, height=300)
     realImage = image.copy()
