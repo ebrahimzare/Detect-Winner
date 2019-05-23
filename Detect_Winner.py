@@ -2,29 +2,6 @@ import imutils
 import cv2
 import numpy as np
 
-def winner_first_game(img_path):
-    img=roi(img_path)
-   # upper = np.array([255, 255, 170], dtype='uint8')
-  #  lower = np.array([100, 100, 0], dtype='uint8')
-    height, width, depth = img.shape
-    circle_img = np.zeros((height, width), np.uint8)
-    # define a circle mask
-    mask = cv2.circle(circle_img, (int(width / 2) - 1, int(height / 2) - 50), 10, 1, thickness=-1)
-
-    masked_img = cv2.bitwise_and(img, img, mask=circle_img)
-    circle_locations = mask == 1
-
-    #search if there is a yellow color in the mask
-    bgr = img[circle_locations]
-    rgb = bgr[..., ::-1]
-    yellow = [255, 255, 0]
-    isyellow = False
-    if yellow in rgb:
-        isyellow = True
-    cv2.imshow("masked", masked_img)
-    return isyellow
-
-
 
 
 def order_corner_points(corners):
@@ -108,6 +85,70 @@ def roi(img_path):
 
 
 
+def winner_first_game(img_path):
+    img=roi(img_path)
+   # upper = np.array([255, 255, 170], dtype='uint8')
+  #  lower = np.array([100, 100, 0], dtype='uint8')
+    height, width, depth = img.shape
+    circle_img = np.zeros((height, width), np.uint8)
+    # define a circle mask
+    mask = cv2.circle(circle_img, (int(width / 2) - 1, int(height / 2) - 50), 10, 1, thickness=-1)
+
+    masked_img = cv2.bitwise_and(img, img, mask=circle_img)
+    circle_locations = mask == 1
+
+    #search if there is a yellow color in the mask
+    bgr = img[circle_locations]
+    rgb = bgr[..., ::-1]
+    yellow = [255, 255, 0]
+    isyellow = False
+    if yellow in rgb:
+        isyellow = True
+    cv2.imshow("masked", masked_img)
+    return isyellow
+
+
+
+def winner_second_game(img_path):
+    img = cv2.imread(img_path, 0)
+
+    #resize the image to width=1000
+    W = 1000
+    height, width = img.shape
+    imgScale = W / width
+    newX, newY = img.shape[1] * imgScale, img.shape[0] * imgScale
+    newimg = cv2.resize(img, (int(newX), int(newY)))
+
+    #define template
+    template = cv2.imread('template.jpg', 0)
+    w, h = template.shape[::-1]
+
+    #use matchtemplate to find the template
+    res = cv2.matchTemplate(newimg, template, cv2.TM_CCOEFF)
+    (_, maxVal, _, maxLoc) = cv2.minMaxLoc(res)
+
+    w_img, h_img = newimg.shape[::-1]
+    print(w_img)
+    print(h_img)
+    print("Top left of template", maxLoc[0])
+
+
+    #find the winner base of place of template detection
+    if maxLoc[0] < 300 :
+        winner = 'player1'
+    elif maxLoc[0] > 300 and maxLoc[0] < 520:
+        winner = 'player2'
+    elif maxLoc[0] > 550 and maxLoc[0] < 770:
+        winner = 'player3'
+    elif maxLoc[0] > 800:
+        winner = 'player4'
+
+    print('Winner is', winner)
+
+    cv2.rectangle(newimg, (maxLoc[0], maxLoc[1]),
+                 (maxLoc[0] + w, maxLoc[1] + h), (0, 0, 255), 2)
+    cv2.imshow("newimg/Visualize", newimg)
+    return winner
 
 
 
@@ -115,9 +156,11 @@ def roi(img_path):
 src_path = "./test-img/"
 game_id=1
 
-switch(game_id):
-    1: print("Yellow player is WINNER") if (winner_first_game(src_path + "img1.png")) else print("Orange player is WINNER")
-
+if(game_id==1):
+     print("Yellow player is WINNER") if (winner_first_game(src_path + "img1.png")) else print("Orange player is WINNER")
+elif(game_id==2):
+    winner=winner_second_game(src_path + "img1.png")
+    print(f"Player number {winner} is WINNER")
 
 cv2.waitKey(0)
 
