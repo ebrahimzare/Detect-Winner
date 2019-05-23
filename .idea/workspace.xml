@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="200a1b9c-f27f-407a-b8cb-f43476c79676" name="Default Changelist" comment="" />
+    <list default="true" id="200a1b9c-f27f-407a-b8cb-f43476c79676" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Detect_Winner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Detect_Winner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-img/emir.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-img/example_01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-img/img2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-img/img3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-img/img6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-img/imgRec.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-img/imgRec2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-img/imgRec5.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-img/removed_noise.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-img/test.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-img/thres.png" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Detect_Winner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="16" column="50" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
+            <state relative-caret-position="476">
+              <caret line="118" column="123" selection-start-line="118" selection-start-column="123" selection-end-line="118" selection-end-column="123" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -53,7 +67,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
@@ -136,7 +150,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1235119" />
@@ -161,8 +175,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Detect_Winner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="16" column="50" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
+        <state relative-caret-position="476">
+          <caret line="118" column="123" selection-start-line="118" selection-start-column="123" selection-end-line="118" selection-end-column="123" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
