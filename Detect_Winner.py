@@ -97,7 +97,7 @@ def winner_first_game(img_path):
     masked_img = cv2.bitwise_and(img, img, mask=circle_img)
     circle_locations = mask == 1
 
-    #search if there is a yellow color in the mask
+    #search if there is a yellow color in the mask,( there is two players with in colors of yellow and orange)
     bgr = img[circle_locations]
     rgb = bgr[..., ::-1]
     yellow = [255, 255, 0]
@@ -110,24 +110,24 @@ def winner_first_game(img_path):
 
 
 def winner_second_game(img_path):
-    img = cv2.imread(img_path, 0)
+    img=roi(img_path)
 
     #resize the image to width=1000
     W = 1000
-    height, width = img.shape
+    height, width, chan = img.shape
     imgScale = W / width
     newX, newY = img.shape[1] * imgScale, img.shape[0] * imgScale
     newimg = cv2.resize(img, (int(newX), int(newY)))
 
     #define template
-    template = cv2.imread('template.jpg', 0)
-    w, h = template.shape[::-1]
+    template = cv2.imread(src_path +'template.jpg')
+    w, h, c= template.shape
 
     #use matchtemplate to find the template
     res = cv2.matchTemplate(newimg, template, cv2.TM_CCOEFF)
     (_, maxVal, _, maxLoc) = cv2.minMaxLoc(res)
 
-    w_img, h_img = newimg.shape[::-1]
+    w_img, h_img , c_image= newimg.shape
     print(w_img)
     print(h_img)
     print("Top left of template", maxLoc[0])
@@ -154,13 +154,13 @@ def winner_second_game(img_path):
 
 
 src_path = "./test-img/"
-game_id=1
+game_id=2
 
 if(game_id==1):
      print("Yellow player is WINNER") if (winner_first_game(src_path + "img1.png")) else print("Orange player is WINNER")
 elif(game_id==2):
-    winner=winner_second_game(src_path + "img1.png")
-    print(f"Player number {winner} is WINNER")
+    winner=winner_second_game(src_path + "smash1.jpg")
+    print(f"{winner} is WINNER")
 
 cv2.waitKey(0)
 
