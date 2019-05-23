@@ -2,7 +2,8 @@ import imutils
 import cv2
 import numpy as np
 
-
+#There are 4 games rightnow in Ludex app, so we can easily detect the winner in them by openCv
+#At first we detect the computer or Tv screen from the photo, and then base of that will find the winner in different games
 
 def order_corner_points(corners):
     # Separate corners into individual points
