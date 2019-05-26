@@ -2,6 +2,7 @@ import imutils
 import cv2
 import numpy as np
 
+src_path = "./test-img/"
 #There are 4 games rightnow in Ludex app, so we can easily detect the winner in them by openCv
 #At first we detect the computer or Tv screen from the photo, and then base of that will find the winner in different games
 
@@ -144,7 +145,7 @@ def winner_second_game(img_path):
     elif maxLoc[0] > 800:
         winner = 'player4'
 
-    print('Winner is', winner)
+
 
     cv2.rectangle(newimg, (maxLoc[0], maxLoc[1]),
                  (maxLoc[0] + w, maxLoc[1] + h), (0, 0, 255), 2)
@@ -154,14 +155,19 @@ def winner_second_game(img_path):
 
 
 
-src_path = "./test-img/"
-game_id=2
 
-if(game_id==1):
-     print("Yellow player is WINNER") if (winner_first_game(src_path + "img1.png")) else print("Orange player is WINNER")
-elif(game_id==2):
-    winner=winner_second_game(src_path + "smash1.jpg")
-    print(f"{winner} is WINNER")
+def detect_winner(game_id,img_path ):
 
-cv2.waitKey(0)
+    if (game_id == 1):
+        print("Yellow player is WINNER") if (winner_first_game(src_path + "img1.png")) else print(
+            "Orange player is WINNER")
+    elif (game_id == 2):
+        winner = winner_second_game(src_path + "smash1.jpg")
+        print(f"{winner} is WINNER")
+    cv2.waitKey(0)
+
+
+
+
+
 
