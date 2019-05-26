@@ -130,9 +130,9 @@ def winner_second_game(img_path):
     (_, maxVal, _, maxLoc) = cv2.minMaxLoc(res)
 
     w_img, h_img , c_image= newimg.shape
-    print(w_img)
-    print(h_img)
-    print("Top left of template", maxLoc[0])
+    # print(w_img)
+    # print(h_img)
+    # print("Top left of template", maxLoc[0])
 
 
     #find the winner base of place of template detection
@@ -156,16 +156,19 @@ def winner_second_game(img_path):
 
 
 
-def detect_winner(game_id,img_path ):
+def detect_winner(game_id,img ):
 
     if (game_id == 1):
-        print("Yellow player is WINNER") if (winner_first_game(src_path + "img1.png")) else print(
+        print("Yellow player is WINNER") if (winner_first_game(src_path + img)) else print(
             "Orange player is WINNER")
     elif (game_id == 2):
-        winner = winner_second_game(src_path + "smash1.jpg")
+        winner = winner_second_game(src_path + img)
         print(f"{winner} is WINNER")
     cv2.waitKey(0)
 
+
+#test the function
+detect_winner(2,'smash1.jpg' )
 
 
 
