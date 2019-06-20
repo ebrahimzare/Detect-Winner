@@ -82,7 +82,7 @@ def roi(img_path):
          else:
             transformed= image
 
-
+    cv2.imshow("transformed", transformed)
     return transformed
 
 
@@ -168,7 +168,7 @@ def detect_winner(game_id,img ):
 
 
 #test the function
-detect_winner(2,'smash1.jpg' )
+detect_winner(2,'smash4.png' )
 
 
 
